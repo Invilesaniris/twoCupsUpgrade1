@@ -36,23 +36,11 @@ public class breadthFirstSearch {
             System.out.println("illegal Actions:");
             ArrayList<Action> legalActions=Problem.ACTIONS(currentNode.state);
             Node childNode;
-
-            
-            // System.out.println("-------------");
-            // RunTest.printState(currentNode.state);
-            // System.out.println("parent:");
-            // if(currentNode.parent!=null){
-            //     RunTest.printState(currentNode.parent.state);
-            // }
-            // if(currentNode.action!=null){
-            //     currentNode.action.printAction();
-            // }
-            // System.out.println("xxxxxxxxxx");
-            // for(int i=0; i<legalActions.size(); ++i){
-            //     legalActions.get(i).printAction();
-            // }
-            // System.out.println("-------------");
-            
+            System.out.println("ajacent states:");
+            ArrayList<int[]> adjacentStates=Problem.adjacentStates(currentNode.state);
+            for(int i=0; i<adjacentStates.size(); ++i){
+                RunTest.printState(adjacentStates.get(i));
+            }
             
             System.out.println("legal child state:");
             for(int i=0; i<legalActions.size(); ++i){

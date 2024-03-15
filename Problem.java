@@ -1,9 +1,78 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.lang.Boolean;
 
 
 
 class Problem{
     static public int initialState[]={0,0};
+    public static ArrayList<int[]> adjacentStates(int state[]){
+        ArrayList<int[]> res=new ArrayList<int []>();
+        Action tmpAction=null;
+        HashMap<String, Boolean> hash=new HashMap<String, Boolean>();
+        int newState[]=null;
+
+        for(int i=0; i<6; ++i){
+            switch (i) {
+                case 0:
+                {
+                    tmpAction=new Action("water source", "4l cup", 4-state[0]);
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                    
+                    break;
+                }
+                case 1:
+                {
+                    tmpAction=new Action("water source", "3l cup", 3-state[1]);
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                   
+                    break;
+                }
+                case 2:{
+                    tmpAction=new Action("4l cup", "3l cup", Math.min(state[0], 3-state[1]));
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                    
+                    break;
+                }
+                case 3:{
+                    tmpAction=new Action("3l cup", "4l cup", Math.min(state[1], 4-state[0]));
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                    
+                    break;
+                }
+                case 4:{
+                    tmpAction=new Action("4l cup", "ground", state[0]);
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                    
+                    break;
+                }
+                case 5:{
+                    tmpAction=new Action("3l cup", "ground", state[1]);
+                    newState=Problem.TRANSITION_MODEL(state, tmpAction);
+                    
+                    break;
+                }
+
+
+                
+            }
+            String key=String.valueOf(newState[0])+String.valueOf(newState[1]);
+            if(hash.get(key)==null){
+                
+                hash.put(key, true);
+                if(newState[0]!=state[0] || newState[1]!=state[1]){
+                    
+                    res.add(newState);
+                }
+            }
+            
+
+        }
+
+        
+       
+        return res;
+    }
     
     public static ArrayList<Action> ACTIONS(int state[]){
         ArrayList<Action> legalActions=new ArrayList<Action>();

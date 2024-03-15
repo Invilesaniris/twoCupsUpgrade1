@@ -3,12 +3,13 @@ public class RunTest {
         System.out.println(state[0]+" "+state[1]);
     }
     public static void printSolution(Node solution){
-        
+        System.out.println("The solution path:");
         while(solution.parent!=null){
             RunTest.printState(solution.state);
+            System.out.println("/\\");
             System.out.print("| ");
             solution.action.printAction();
-            System.out.println("V");
+            
             solution=solution.parent;
         }
         RunTest.printState(solution.state);
